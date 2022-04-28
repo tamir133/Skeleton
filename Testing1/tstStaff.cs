@@ -33,8 +33,8 @@ namespace Testing1
             //Testing Staff DOB property
             clsStaff AnStaff = new clsStaff();
             DateTime TestData = DateTime.Now.Date;
-            AnStaff.DateAdded = TestData;
-            Assert.AreEqual(AnStaff.DateAdded, TestData);
+            AnStaff.StaffDOB = TestData;
+            Assert.AreEqual(AnStaff.StaffDOB, TestData);
         }
         [TestMethod]
         public void StaffNoOK()
@@ -54,16 +54,7 @@ namespace Testing1
             Boolean TestData = true;
             AnStaff.StaffGender = TestData;
             Assert.AreEqual(AnStaff.StaffGender, TestData);
-        }
-        [TestMethod]
-        public void CustomerNoOK()
-        {
-            //Testing Customer No property
-            clsStaff AnStaff = new clsStaff();
-            string TestData = "16";
-            AnStaff.CustomerNo = TestData;
-            Assert.AreEqual(AnStaff.CustomerNo, TestData);
-
+        
         }
         [TestMethod]
         public void StaffActivityOK()
@@ -75,6 +66,8 @@ namespace Testing1
             Assert.AreEqual(AnStaff.DateAdded, TestData);
 
         }
+
+    
 
 
 
