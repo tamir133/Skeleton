@@ -33,11 +33,12 @@
         <br />
         &nbsp;&nbsp;
         <br />
+        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="Ok" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+        <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
         <br />
         <asp:Label ID="lblError" runat="server"></asp:Label>
         <br />
-        <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="Ok" />
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
         <p>
             &nbsp;</p>
     </form>
