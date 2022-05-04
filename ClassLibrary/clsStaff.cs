@@ -85,5 +85,48 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string StaffFullName, string StaffDOB, string StaffActivity)
+        {
+            String Error = "";
+            DateTime DateTemp;
+            if (StaffFullName.Length == 0)
+            {
+                Error = Error + "The Staff Name may not be blank : ";
+            }
+            if (StaffFullName.Length > 21)
+            {
+                Error = Error + "The Staff Name must be less than 21 characters :";
+            }
+            try
+            {
+                DateTemp = Convert.ToDateTime(StaffDOB);
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                Error = Error + "The date is not valid : ";
+            }
+
+            //is the staff activity blank
+            if (StaffActivity.Length == 0)
+            {
+                //record the error
+                Error = Error + "The Staff Activity may not be less than 0 characters :";
+            }
+            //if the staff activity is too long
+            if (StaffActivity.Length > 50)
+            {
+                //record the error
+                Error = Error + "The Staff activity must be less than 51 characters :";
+            }
+            //return any error messages
+            return Error;
+
+
+        }
     }
 }

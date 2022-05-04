@@ -7,6 +7,11 @@ namespace Testing1
     [TestClass]
     public class tstStaff
     {
+        //good test data
+        string StaffFullName = "Mherab Ahmed";
+        string StaffDOB = DateTime.Now.Date.ToString();
+        string StaffActivity = "Clocked in at 7am";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -148,5 +153,273 @@ namespace Testing1
             }
             Assert.IsTrue(OK);
         }
+        //test for valid method
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            //create an instance of the staff class
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffFullNameMinLessOne()
+        {
+            clsStaff AnStaff = new clsStaff();
+            String Error = "";
+            string StaffFullName = "";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffFullNameMin()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            string StaffFullName = "m";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffFullNameMaxPlusOne()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            string StaffFullName = "";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreNotEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffFUllNameMaxLessOne()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            string StaffFullName = "mmmmm";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffFUllNameMid()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            string StaffFullName = "mmmmm";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffFullNameMax()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            string StaffFullName = "mmmmmm";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffFullNameExtremeMax()
+        {
+            clsStaff AnStaff = new clsStaff();
+            String Error = "";
+            string StaffFullName = "";
+            StaffFullName = StaffFullName.PadRight(500, 'm');
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreNotEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffDOBExtremeMin()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-100);
+            string StaffDOB = TestDate.ToString();
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffDOBMinLessOne()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-1);
+            string StaffDOB = TestDate.ToString();
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffDOBMin()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            string StaffDOB = TestDate.ToString();
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffDOBMinPlusOne()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddDays(1);
+            string StaffDOB = TestDate.ToString();
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffDOBExtremeMax()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddDays(100);
+            string StaffDOB = TestDate.ToString();
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffDOBInvalidData()
+        {
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            string Error = "";
+            //set the date to a non date value;
+            string StaffDOB = "this is not a date!";
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffActivityExtremeMin()
+        {
+            clsStaff AnStaff = new clsStaff();
+            string Error = "";
+            string StaffActivity = "";
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+
+        public void StaffActivityMinLessOne()
+
+        {
+            //create an instance of the class we want to create
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //this should fail
+            string StaffActivity = "";
+            StaffActivity = StaffActivity.PadRight(9, 'm');
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+
+        public void StaffActivityMin()
+
+        {
+            //create an instance of the class we want to create
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //this should fail
+            string StaffActivity = "";
+            StaffActivity = StaffActivity.PadRight(10, 'm');
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffActivityMinPlusOne()
+
+        {
+            //create an instance of the class we want to create
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //this should pass
+            string StaffActivity = "";
+            StaffActivity = StaffActivity.PadRight(11, 'm');
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void StaffActivityMaxLessOne()
+
+        {
+            //create an instance of the class we want to create
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //this should pass
+            string StaffActivity = "";
+            StaffActivity = StaffActivity.PadRight(49, 'm');
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffActivityMaxPlusOne()
+
+        {
+            //create an instance of the class we want to create
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //this should fail
+            string StaffActivity = "";
+            StaffActivity = StaffActivity.PadRight(51, 'm');
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void StaffActivityMid()
+
+        {
+            //create an instance of the class we want to create
+            clsStaff AnStaff = new clsStaff();
+            //string variable to store any error message
+            String Error = "";
+            //this should pass
+            string StaffActivity = "";
+            StaffActivity = StaffActivity.PadRight(30, 'm');
+            //invoke the method
+            Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+
+        }
     }
 }
+
+
+
