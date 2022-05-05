@@ -209,13 +209,9 @@ namespace Testing3
         [TestMethod]
         public void ValidMethodOK()
         {
-            //create an instance of the class we want to create
             clsCustomer ACustomer = new clsCustomer();
-            //string variable to store any error message
             String Error = "";
-            //invoke the method
             Error = ACustomer.Valid(CustomerFullName, CustomerDateOfBirth, CustomerEmail, CustomerAddress);
-            //test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
 

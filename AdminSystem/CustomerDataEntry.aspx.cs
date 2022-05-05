@@ -13,18 +13,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
-    protected void btnOK_Click(object sender, EventArgs e)
-    {
-        clsCustomer ACustomer = new clsCustomer();
-        ACustomer.CustomerId = Convert.ToInt32(txtCustomerId.Text);
-        ACustomer.CustomerFullName = txtCustomerFullName.Text;
-        ACustomer.CustomerGender = Convert.ToBoolean(ddlCustomerGender.SelectedValue);
-        ACustomer.CustomerDateOfBirth = Convert.ToDateTime(txtCustomerDateOfBirth.Text);
-        ACustomer.CustomerEmail = txtCustomerEmail.Text;
-        ACustomer.CustomerAddress = txtCustomerAddress.Text;
-        Session["ACustomer"] = ACustomer;
-        Response.Redirect("CustomerViewer.aspx");
-    }
+
 
     protected void btnFind_Click(object sender, EventArgs e)
     {
@@ -42,7 +31,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             ddlCustomerGender.SelectedValue = ACustomer.CustomerGender.ToString();
             ddlCustomerGender.Text = ACustomer.CustomerGender.ToString();
             txtCustomerDateOfBirth.Text = ACustomer.CustomerDateOfBirth.ToString();
-            txtCustomerEmail.Text = ACustomer.CustomerEmail;            
+            txtCustomerEmail.Text = ACustomer.CustomerEmail;
             txtCustomerAddress.Text = ACustomer.CustomerAddress;
 
         }
@@ -55,11 +44,39 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Error: This Id doesn't exist!";
             lblError.Visible = true;
         }
+    
     }
-
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("CustomerList.aspx");
+    }
+
+    protected void btnOK_Click(object sender, EventArgs e)
+    {
+        clsCustomer ACustomer = new clsCustomer();
+        string CustomerFullName = txtCustomerFullName.Text;
+        string CustomerDateOfBirth = txtCustomerDateOfBirth.Text;
+        string CustomerEmail = txtCustomerEmail.Text;
+        string CustomerAddress = txtCustomerAddress.Text;
+        string Error = "";
+        
+
+
+        Error = ACustomer.Valid(CustomerFullName, CustomerDateOfBirth, CustomerEmail, CustomerAddress);
+        
+        if (Error == "")
+        {
+            
+            ACustomer.CustomerFullName = CustomerFullName;
+            ACustomer.CustomerGender = Convert.ToBoolean(ddlCustomerGender.SelectedValue);
+            ACustomer.CustomerDateOfBirth = Convert.ToDateTime(CustomerDateOfBirth);
+            ACustomer.CustomerEmail = CustomerEmail;
+            ACustomer.CustomerAddress = CustomerAddress;
+            Session["ACustomer"] = ACustomer;
+            Response.Write("CustomerViewer.aspx");
+
+        }
+        lblError.Text = Error;
     }
 }
