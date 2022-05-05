@@ -13,7 +13,7 @@ namespace Testing3
             clsCustomer ACustomer = new clsCustomer();
             Assert.IsNotNull(ACustomer);
         }
-        //====================CustomerId=============================
+        //====================CustomerId======================================
         [TestMethod]
         public void CustomerIdOK()
         {
@@ -23,7 +23,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerId, TestData);
         }
 
-        //====================CustomerFullName=============================
+        //====================CustomerFullName================================
 
         [TestMethod]
         public void CustomerFullNameOK()
@@ -34,7 +34,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerFullName, TestData);
         }
 
-        //====================CustomerGender=============================
+        //====================CustomerGender=================================
 
         [TestMethod]
         public void CustomerGenderOK()
@@ -45,7 +45,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerGender, TestData);
         }
 
-        //====================CustomerDateOfBirth=============================
+        //====================CustomerDateOfBirth============================
 
         [TestMethod]
         public void CustomerDateOfBirthOK()
@@ -56,7 +56,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerDateOfBirth, TestData);
         }
 
-        //====================CustomerEmail===================================
+        //====================CustomerEmail==================================
 
         [TestMethod]
         public void CustomerEmailOK()
@@ -67,7 +67,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerEmail, TestData);
         }
 
-        //====================CustomerAddress=================================
+        //====================CustomerAddress===============================
 
         [TestMethod]
         public void CustomerAddressOK()
@@ -78,7 +78,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerAddress, TestData);
         }
 
-        //====================FindMethod=================================
+        //====================FindMethod===================================
 
         [TestMethod]
 
@@ -91,7 +91,7 @@ namespace Testing3
             Assert.IsTrue(Found);
         }
 
-        //====================CustomerIdFound==================
+        //====================CustomerIdFound=============================
 
         [TestMethod]
 
@@ -109,7 +109,7 @@ namespace Testing3
             Assert.IsTrue(OK);
         }
 
-        //===============CustomerFullNameFound==================
+        //===============CustomerFullNameFound==============================
 
         [TestMethod]
         public void TestCustomerFullNameFound()
