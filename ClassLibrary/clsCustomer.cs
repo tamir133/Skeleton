@@ -106,5 +106,59 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string CustomerFullName, string CustomerDateOfBirth, string CustomerEmail, string CustomerAddress)
+        {
+            String Error = "";
+            DateTime DateTemp;
+
+            if (CustomerFullName.Length == 0)
+            {
+                Error = Error + "The Customer FullName may not be blank : ";
+            }
+            if (CustomerFullName.Length > 50)
+            {
+                Error = Error + "The Customer Full Name must be less than 50 characters : ";
+            }
+
+            try
+            {
+                DateTemp = Convert.ToDateTime(CustomerDateOfBirth);
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error = Error + "The Date cannot be above today's date : ";
+                }
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                Error = Error + "The date was not a valid date : ";
+            }
+
+            if (CustomerEmail.Length < 5)
+            {
+                Error = Error + "The Customer Email must not be less 5 characters : ";
+            }
+            if (CustomerEmail.Length > 40)
+            {
+                Error = Error + "The Customer Email must be less than 40 characters : ";
+            }
+
+            if (CustomerAddress.Length == 0)
+            {
+                Error = Error + "The Customer Address must not be blank : ";
+            }
+            if (CustomerAddress.Length > 50)
+            {
+                Error = Error + "The Customer Address must be less than 50 characters : ";
+            }
+
+            return Error;
+
+
+        }
     }
 }
