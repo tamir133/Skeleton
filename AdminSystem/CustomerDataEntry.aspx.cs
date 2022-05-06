@@ -73,8 +73,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             ACustomer.CustomerDateOfBirth = Convert.ToDateTime(CustomerDateOfBirth);
             ACustomer.CustomerEmail = CustomerEmail;
             ACustomer.CustomerAddress = CustomerAddress;
-            Session["ACustomer"] = ACustomer;
-            Response.Write("CustomerViewer.aspx");
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            CustomerList.ThisCustomer = ACustomer;
+            CustomerList.Add();
+            Response.Redirect("CustomerList.aspx");
 
         }
         lblError.Text = Error;
