@@ -66,5 +66,16 @@ namespace ClassLibrary
                 Index++;
             }
         }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@CustomerFullName", mThisCustomer.CustomerFullName);
+            DB.AddParameter("@CustomerGender", mThisCustomer.CustomerGender);
+            DB.AddParameter("@CustomerDateOfBirth", mThisCustomer.CustomerDateOfBirth);
+            DB.AddParameter("@CustomerEmail", mThisCustomer.CustomerEmail);
+            DB.AddParameter("@CustomerAddress", mThisCustomer.CustomerAddress);
+            return DB.Execute("sproc_tblCustomer_Insert");
+        }
     }
 }

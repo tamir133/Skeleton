@@ -17,6 +17,8 @@ namespace Testing3
             Assert.IsNotNull(AllCustomers);
         }
 
+        //====================CustomerListOK=============================
+
         [TestMethod]
         public void CustomerListOK()
         {
@@ -34,6 +36,7 @@ namespace Testing3
             Assert.AreEqual(AllCustomers.CustomerList, TestList);
         }
 
+        //====================ThisCustomerPropertyOK=============================
 
         [TestMethod]
         public void ThisCustomerPropertyOK()
@@ -49,6 +52,8 @@ namespace Testing3
             AllCustomers.ThisCustomer = TestCustomer;
             Assert.AreEqual(AllCustomers.ThisCustomer, TestCustomer);
         }
+
+        //====================ListAndCountOK======================================
 
         [TestMethod]
         public void ListAndCountOK()
@@ -66,5 +71,31 @@ namespace Testing3
             AllCustomers.CustomerList = TestList;
             Assert.AreEqual(AllCustomers.Count, TestList.Count);
         }
+
+        //====================AddMethod=========================================================
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.CustomerId = 1;
+            TestItem.CustomerFullName = "Nirmal Vinodchandra";
+            TestItem.CustomerGender = true;
+            TestItem.CustomerDateOfBirth = Convert.ToDateTime("12/05/1998");
+            TestItem.CustomerEmail = "nirmal@gmail.com";
+            TestItem.CustomerAddress = "163 Some street";
+            AllCustomers.ThisCustomer = TestItem;
+            TestItem.CustomerId = PrimaryKey;
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
+
+        //====================UpdateMethod======================================================
+        //====================DeleteMethod======================================================
+        //====================ReportByCustomerFullNameMethod====================================
+        //===================ReportByCustomerFullNameNoneFound==================================
+        //====================ReportByCustomerFullNameTestDataFound=============================
     }
 }
