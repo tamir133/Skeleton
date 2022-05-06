@@ -27,7 +27,7 @@ namespace Testing3
             clsCustomer TestItem = new clsCustomer();
             TestItem.CustomerId = 1;
             TestItem.CustomerFullName = "Nirmal Vinodchandra";
-            TestItem.CustomerGender = true;            
+            TestItem.CustomerGender = true;
             TestItem.CustomerDateOfBirth = Convert.ToDateTime("12/05/1998");
             TestItem.CustomerEmail = "nirmal@gmail.com";
             TestItem.CustomerAddress = "163 Some street";
