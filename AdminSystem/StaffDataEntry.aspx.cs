@@ -16,15 +16,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsStaff
         clsStaff AnStaff = new clsStaff();
-        //capture the staff no
-        AnStaff.StaffFullName = txtStaffFullName.Text;
-        AnStaff.StaffGender = Convert.ToBoolean(chkMale.Checked);
-        AnStaff.StaffDOB = Convert.ToDateTime(txtStaffDOB.Text);
-        AnStaff.StaffActivity = txtStaffActivity.Text;
-        //store the staff in the session object
-        Session["AnStaff"] = AnStaff;
-        //navigate to the viewer page
-        Response.Redirect("StaffViewer.aspx");
+   
+        string StaffFullName = txtStaffFullName.Text;
+        string StaffDOB = txtStaffDOB.Text;
+        string StaffActivity = txtStaffActivity.Text;
+        
+        string Error = "";
+        
+        Error = AnStaff.Valid(StaffFullName, StaffDOB, StaffActivity);
+        if (Error == "")
+        {
+  
+            AnStaff.StaffFullName = StaffFullName;
+            AnStaff.StaffGender = Convert.ToBoolean(chkMale.Checked);
+            AnStaff.StaffDOB = Convert.ToDateTime(txtStaffDOB.Text);
+            AnStaff.StaffActivity = StaffActivity;
+            Session["AnStaff"] = AnStaff;
+            Response.Redirect("StaffViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
        
     }
 

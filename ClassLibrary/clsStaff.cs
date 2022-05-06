@@ -20,7 +20,7 @@ namespace ClassLibrary
                 mDOB = value;
             }
         }
-        public Int32 StaffNo
+        public int StaffNo
         {
             get
             {
@@ -73,11 +73,13 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStaff_FilterByStaffNo");
             if(DB.Count == 1)
             {
-                mDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["StaffDOB"]);
-                mStaffActivity = Convert.ToString(DB.DataTable.Rows[0]["StaffActivity"]);
-                mStaffGender = Convert.ToBoolean(DB.DataTable.Rows[0]["StaffGender"]);
-                mStaffFullName = Convert.ToString(DB.DataTable.Rows[0]["StaffFullName"]);
                 mStaffNo = Convert.ToInt32(DB.DataTable.Rows[0]["StaffNo"]);
+                mStaffFullName = Convert.ToString(DB.DataTable.Rows[0]["StaffFullName"]);
+                mDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["StaffDOB"]);
+                mStaffGender = Convert.ToBoolean(DB.DataTable.Rows[0]["StaffGender"]);
+                mStaffActivity = Convert.ToString(DB.DataTable.Rows[0]["StaffActivity"]);
+
+
                 return true;
             }
             else
