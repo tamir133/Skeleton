@@ -93,9 +93,109 @@ namespace Testing3
         }
 
         //====================UpdateMethod======================================================
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.CustomerId = 6;
+            TestItem.CustomerFullName = "Akshat Cala";
+            TestItem.CustomerGender = true;
+            TestItem.CustomerDateOfBirth = Convert.ToDateTime("13/09/2001");
+            TestItem.CustomerEmail = "Akshat@gmail.com";
+            TestItem.CustomerAddress = "38 Quick Street";
+
+            AllCustomers.ThisCustomer = TestItem;
+
+            TestItem.CustomerId = PrimaryKey;
+            TestItem.CustomerId = 6;
+            TestItem.CustomerFullName = "DrariK Dane";
+            TestItem.CustomerGender = true;
+            TestItem.CustomerDateOfBirth = Convert.ToDateTime("1/09/1994");
+            TestItem.CustomerEmail = "DD@gmail.com";
+            TestItem.CustomerAddress = "69 Hot street";
+            AllCustomers.ThisCustomer = TestItem;
+            AllCustomers.Update();
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
+
         //====================DeleteMethod======================================================
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.CustomerId = 6;
+            TestItem.CustomerFullName = "DrariK Dane";
+            TestItem.CustomerGender = true;
+            TestItem.CustomerDateOfBirth = Convert.ToDateTime("1/09/1994");
+            TestItem.CustomerEmail = "DD@gmail.com";
+            TestItem.CustomerAddress = "69 Hot street";
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerId = PrimaryKey;
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            AllCustomers.Delete();
+            Boolean Found = AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
+
         //====================ReportByCustomerFullNameMethod====================================
+
+        [TestMethod]
+        public void ReportByCustomerFullNameMethodOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            //create an instance of the filtered data
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            //apply a blank string (Shoulf return all the records);
+            FilteredCustomers.ReportByFullName("");
+            //test to see that the two values are the same
+            Assert.AreEqual(AllCustomers.Count, FilteredCustomers.Count);
+        }
+
         //===================ReportByCustomerFullNameNoneFound==================================
+
+        [TestMethod]
+        public void ReportByCustomerFullNameNoneFound()
+        {
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            FilteredCustomers.ReportByFullName("Drake Sole");
+            Assert.AreEqual(0, FilteredCustomers.Count);
+        }
+
         //====================ReportByCustomerFullNameTestDataFound=============================
+
+        [TestMethod]
+        public void ReportByCustomerFullNameTestDataFound()
+        {
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            Boolean OK = true;
+            FilteredCustomers.ReportByFullName("Nirmal Vinodchandra");
+            if (FilteredCustomers.Count == 2)
+            {
+                if (FilteredCustomers.CustomerList[0].CustomerId != 1)
+                {
+                    OK = false;
+                }
+
+                if (FilteredCustomers.CustomerList[1].CustomerId != 11)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
     }
 }

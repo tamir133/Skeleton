@@ -8,12 +8,33 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+   Int32 CustomerId;
     protected void Page_Load(object sender, EventArgs e)
     {
+       CustomerId = Convert.ToInt32(Session["CustomerId"]);
+          if (IsPostBack == false)
+          {
+             if (CustomerId != -1)
+             {
+                DisplayCustomers();
+             }
+          }
+    }
+
+    void DisplayCustomers()
+    {
+        clsCustomerCollection ACustomer = new clsCustomerCollection();
+        ACustomer.ThisCustomer.Find(CustomerId);
+        txtCustomerId.Text = ACustomer.ThisCustomer.CustomerId.ToString();
+        txtCustomerFullName.Text = ACustomer.ThisCustomer.CustomerFullName;
+        ddlCustomerGender.Text = ACustomer.ThisCustomer.CustomerGender.ToString();
+        txtCustomerDateOfBirth.Text = ACustomer.ThisCustomer.CustomerDateOfBirth.ToString();
+        txtCustomerEmail.Text = ACustomer.ThisCustomer.CustomerEmail;       
+        txtCustomerAddress.Text = ACustomer.ThisCustomer.CustomerAddress;
 
     }
 
-
+    
 
     protected void btnFind_Click(object sender, EventArgs e)
     {
@@ -67,15 +88,25 @@ public partial class _1_DataEntry : System.Web.UI.Page
         
         if (Error == "")
         {
-            
+            ACustomer.CustomerId = CustomerId;
             ACustomer.CustomerFullName = CustomerFullName;
             ACustomer.CustomerGender = Convert.ToBoolean(ddlCustomerGender.SelectedValue);
             ACustomer.CustomerDateOfBirth = Convert.ToDateTime(CustomerDateOfBirth);
             ACustomer.CustomerEmail = CustomerEmail;
             ACustomer.CustomerAddress = CustomerAddress;
             clsCustomerCollection CustomerList = new clsCustomerCollection();
-            CustomerList.ThisCustomer = ACustomer;
-            CustomerList.Add();
+            if (CustomerId == -1)
+            {
+                CustomerList.ThisCustomer = ACustomer;
+                CustomerList.Add();
+            }
+
+            else
+            {
+                CustomerList.ThisCustomer.Find(CustomerId);
+                CustomerList.ThisCustomer = ACustomer;
+                CustomerList.Update();
+            }
             Response.Redirect("CustomerList.aspx");
 
         }
